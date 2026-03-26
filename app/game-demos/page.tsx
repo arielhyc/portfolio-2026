@@ -48,8 +48,7 @@ function YoutubePreview({ youtubeUrl }: { youtubeUrl: string }) {
   const embed = toYoutubeEmbedUrl(youtubeUrl);
   return (
     <div className="overflow-hidden rounded-2xl border border-white/10 bg-white/[0.03]">
-      {/* Use explicit height because Tailwind's aspect utilities may not exist in this build. */}
-      <div className="relative w-full h-72 md:h-80">
+      <div className="relative w-full" style={{ aspectRatio: "16 / 9" }}>
         <iframe
           className="absolute inset-0 h-full w-full"
           src={embed}
@@ -104,39 +103,45 @@ function DemoProjectCard({ project }: { project: DemoProject }) {
   return (
     <article className="space-y-4">
       <div className="rounded-3xl border border-white/10 bg-white/[0.03] p-6">
-        <div className="text-sm font-medium text-white/60">Game Demo</div>
-        <h2 className="mt-2 text-2xl font-semibold leading-tight">{project.title}</h2>
-        {project.teamLine ? (
-          <div className="mt-2 text-sm text-white/70">{project.teamLine}</div>
-        ) : null}
+        <div className="flex flex-col gap-6 md:flex-row md:items-start md:justify-between">
+          <div className="min-w-0 flex-1">
+            <div className="text-sm font-medium text-white/60">Game Demo</div>
+            <h2 className="mt-2 text-2xl font-semibold leading-tight">{project.title}</h2>
+            {project.teamLine ? (
+              <div className="mt-2 text-sm text-white/70">{project.teamLine}</div>
+            ) : null}
 
-        <div className="mt-4 space-y-3">
-          {project.paragraphs.map((p, idx) => (
-            <p key={idx} className="text-sm leading-7 text-white/70">
-              {p}
-            </p>
-          ))}
-        </div>
-
-        <div className="mt-5 space-y-3">
-          {project.itchUrl ? (
-            <PreviewLinkCard title="itch.io" href={project.itchUrl} />
-          ) : (
-            <div className="rounded-2xl border border-white/10 bg-white/[0.03] p-5">
-              <div className="text-sm font-medium text-white/85">itch.io Link</div>
-              <div className="mt-2 text-xs text-white/60">
-                TODO: add itchUrl in `app/game-demos/page.tsx`.
-              </div>
+            <div className="mt-4 space-y-3">
+              {project.paragraphs.map((p, idx) => (
+                <p key={idx} className="text-sm leading-7 text-white/70">
+                  {p}
+                </p>
+              ))}
             </div>
-          )}
+          </div>
 
-          {project.downloadUrl ? (
-            <PreviewLinkCard
-              title="Download Game"
-              href={project.downloadUrl}
-              subtitle="Google Drive"
-            />
-          ) : null}
+          <div className="w-full md:w-[320px] lg:w-[360px]">
+            <div className="space-y-3">
+              {project.itchUrl ? (
+                <PreviewLinkCard title="itch.io" href={project.itchUrl} />
+              ) : (
+                <div className="rounded-2xl border border-white/10 bg-white/[0.03] p-5">
+                  <div className="text-sm font-medium text-white/85">itch.io Link</div>
+                  <div className="mt-2 text-xs text-white/60">
+                    TODO: add itchUrl in `app/game-demos/page.tsx`.
+                  </div>
+                </div>
+              )}
+
+              {project.downloadUrl ? (
+                <PreviewLinkCard
+                  title="Download Game"
+                  href={project.downloadUrl}
+                  subtitle="Google Drive"
+                />
+              ) : null}
+            </div>
+          </div>
         </div>
       </div>
 
