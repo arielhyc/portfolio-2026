@@ -39,7 +39,8 @@ const gameDemos: Project[] = [
     title: "Demo Project 1",
     description: "A short pitch focusing on gameplay feel and technical highlights.",
     tags: ["Unity", "Gameplay", "Systems"],
-    href: "/projects/demo-1",
+    // Per requirement: clicking Demo Project 1 "View" goes to the Game Demos page.
+    href: "/game-demos",
   },
   {
     title: "Demo Project 2",
