@@ -102,65 +102,55 @@ function PreviewLinkCard({
 
 function DemoProjectCard({ project }: { project: DemoProject }) {
   return (
-    <article className="rounded-3xl border border-white/10 bg-white/[0.03] p-6">
-      <div className="flex flex-col gap-6 md:flex-row md:items-start md:justify-between">
-        <div className="min-w-0 flex-1">
-          <div className="text-sm font-medium text-white/60">Game Demo</div>
-          <h2 className="mt-2 text-2xl font-semibold leading-tight">
-            {project.title}
-          </h2>
-          {project.teamLine ? (
-            <div className="mt-2 text-sm text-white/70">{project.teamLine}</div>
+    <article className="space-y-4">
+      <div className="rounded-3xl border border-white/10 bg-white/[0.03] p-6">
+        <div className="text-sm font-medium text-white/60">Game Demo</div>
+        <h2 className="mt-2 text-2xl font-semibold leading-tight">{project.title}</h2>
+        {project.teamLine ? (
+          <div className="mt-2 text-sm text-white/70">{project.teamLine}</div>
+        ) : null}
+
+        <div className="mt-4 space-y-3">
+          {project.paragraphs.map((p, idx) => (
+            <p key={idx} className="text-sm leading-7 text-white/70">
+              {p}
+            </p>
+          ))}
+        </div>
+
+        <div className="mt-5 space-y-3">
+          {project.itchUrl ? (
+            <PreviewLinkCard title="itch.io" href={project.itchUrl} />
+          ) : (
+            <div className="rounded-2xl border border-white/10 bg-white/[0.03] p-5">
+              <div className="text-sm font-medium text-white/85">itch.io Link</div>
+              <div className="mt-2 text-xs text-white/60">
+                TODO: add itchUrl in `app/game-demos/page.tsx`.
+              </div>
+            </div>
+          )}
+
+          {project.downloadUrl ? (
+            <PreviewLinkCard
+              title="Download Game"
+              href={project.downloadUrl}
+              subtitle="Google Drive"
+            />
           ) : null}
-
-          <div className="mt-4 space-y-3">
-            {project.paragraphs.map((p, idx) => (
-              <p key={idx} className="text-sm leading-7 text-white/70">
-                {p}
-              </p>
-            ))}
-          </div>
-
-          <div className="mt-5">
-            {project.youtubeUrl ? (
-              <YoutubePreview youtubeUrl={project.youtubeUrl} />
-            ) : (
-              <div className="rounded-2xl border border-white/10 bg-white/[0.03] p-5">
-                <div className="text-sm font-medium text-white/85">
-                  YouTube Preview
-                </div>
-                <div className="mt-2 text-xs text-white/60">
-                  TODO: add youtubeUrl in `app/game-demos/page.tsx`.
-                </div>
-              </div>
-            )}
-          </div>
         </div>
+      </div>
 
-        <div className="min-w-0 md:w-[360px]">
-          <div className="mt-4 space-y-3">
-            {project.itchUrl ? (
-              <PreviewLinkCard title="itch.io" href={project.itchUrl} />
-            ) : (
-              <div className="rounded-2xl border border-white/10 bg-white/[0.03] p-5">
-                <div className="text-sm font-medium text-white/85">
-                  itch.io Link
-                </div>
-                <div className="mt-2 text-xs text-white/60">
-                  TODO: add itchUrl in `app/game-demos/page.tsx`.
-                </div>
-              </div>
-            )}
-
-            {project.downloadUrl ? (
-              <PreviewLinkCard
-                title="Download Game"
-                href={project.downloadUrl}
-                subtitle="Google Drive"
-              />
-            ) : null}
+      <div className="rounded-3xl border border-white/10 bg-white/[0.03] p-4 md:p-6">
+        {project.youtubeUrl ? (
+          <YoutubePreview youtubeUrl={project.youtubeUrl} />
+        ) : (
+          <div className="rounded-2xl border border-white/10 bg-white/[0.03] p-5">
+            <div className="text-sm font-medium text-white/85">YouTube Preview</div>
+            <div className="mt-2 text-xs text-white/60">
+              TODO: add youtubeUrl in `app/game-demos/page.tsx`.
+            </div>
           </div>
-        </div>
+        )}
       </div>
     </article>
   );
