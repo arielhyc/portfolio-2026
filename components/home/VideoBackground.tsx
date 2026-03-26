@@ -26,7 +26,6 @@ export default function VideoBackground({ src, poster }: VideoBackgroundProps) {
         className="h-full w-full object-cover"
         autoPlay
         muted
-        volume={0}
         loop
         playsInline
         preload="metadata"
