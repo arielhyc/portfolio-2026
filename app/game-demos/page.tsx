@@ -48,7 +48,8 @@ function YoutubePreview({ youtubeUrl }: { youtubeUrl: string }) {
   const embed = toYoutubeEmbedUrl(youtubeUrl);
   return (
     <div className="overflow-hidden rounded-2xl border border-white/10 bg-white/[0.03]">
-      <div className="relative aspect-video w-full">
+      {/* Use explicit height because Tailwind's aspect utilities may not exist in this build. */}
+      <div className="relative w-full h-72 md:h-80">
         <iframe
           className="absolute inset-0 h-full w-full"
           src={embed}
