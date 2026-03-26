@@ -29,6 +29,7 @@ const demos: DemoProject[] = [
       "This is a puzzle game developed in Global Game Jam 2021, players will play as a robot, who find that their head is not on the body every morning. Players can only see and control the body from the perspective of the head. When the body touches the head, the head will return to the body. In addition, the bigger conspiracy is not far away.",
       "After several daily levels, players will find the real reason for the head falling.",
     ],
+    youtubeUrl: "https://youtu.be/LaVJZmNlqrM",
     downloadUrl:
       "https://drive.google.com/file/d/1g1-uuJGtyBYFmjFvH4ne80MsEKc5KS9G/view?usp=sharing",
   },
@@ -83,18 +84,16 @@ function PreviewLinkCard({
       href={href}
       target="_blank"
       rel="noreferrer"
-      className="group rounded-2xl border border-white/10 bg-white/[0.03] p-5 transition hover:border-white/20 hover:bg-white/[0.05]"
+      className="group flex items-center justify-between gap-4 rounded-2xl border border-white/10 bg-black/20 px-4 py-3 transition hover:border-white/20 hover:bg-black/30"
     >
-      <div className="flex items-start justify-between gap-4">
-        <div>
-          <div className="text-sm font-medium text-white/85">{title}</div>
-          <div className="mt-1 text-xs text-white/60">
-            {subtitle ?? shortHost}
-          </div>
+      <div className="min-w-0">
+        <div className="text-sm font-medium text-white/85">{title}</div>
+        <div className="mt-0.5 text-xs text-white/60">
+          {subtitle ?? shortHost}
         </div>
-        <div className="text-xs text-emerald-300 group-hover:text-emerald-200">
-          Open →
-        </div>
+      </div>
+      <div className="shrink-0 text-xs text-emerald-300 group-hover:text-emerald-200">
+        Open →
       </div>
     </a>
   );
@@ -120,20 +119,24 @@ function DemoProjectCard({ project }: { project: DemoProject }) {
               </p>
             ))}
           </div>
+
+          <div className="mt-5">
+            {project.youtubeUrl ? (
+              <YoutubePreview youtubeUrl={project.youtubeUrl} />
+            ) : (
+              <div className="rounded-2xl border border-white/10 bg-white/[0.03] p-5">
+                <div className="text-sm font-medium text-white/85">
+                  YouTube Preview
+                </div>
+                <div className="mt-2 text-xs text-white/60">
+                  TODO: add youtubeUrl in `app/game-demos/page.tsx`.
+                </div>
+              </div>
+            )}
+          </div>
         </div>
 
         <div className="min-w-0 md:w-[360px]">
-          {project.youtubeUrl ? (
-            <YoutubePreview youtubeUrl={project.youtubeUrl} />
-          ) : (
-            <div className="rounded-2xl border border-white/10 bg-white/[0.03] p-5">
-              <div className="text-sm font-medium text-white/85">YouTube Preview</div>
-              <div className="mt-2 text-xs text-white/60">
-                TODO: add youtubeUrl in `app/game-demos/page.tsx`.
-              </div>
-            </div>
-          )}
-
           <div className="mt-4 space-y-3">
             {project.itchUrl ? (
               <PreviewLinkCard title="itch.io" href={project.itchUrl} />
