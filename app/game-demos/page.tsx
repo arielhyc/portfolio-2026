@@ -1,4 +1,5 @@
 import Link from "next/link";
+import VideoBackground from "@/components/home/VideoBackground";
 
 type DemoProject = {
   title: string;
@@ -162,8 +163,16 @@ function DemoProjectCard({ project }: { project: DemoProject }) {
 }
 
 export default function GameDemosPage() {
+  const basePath =
+    process.env["__NEXT_ROUTER_BASEPATH"] ||
+    process.env.NEXT_PUBLIC_BASE_PATH ||
+    "";
+  const gameDemosVideo = `${basePath}/videos/game-demos-bg.mp4`;
+
   return (
-    <div className="min-h-screen bg-neutral-950 text-white">
+    <div className="relative min-h-screen bg-neutral-950 text-white">
+      <VideoBackground src={gameDemosVideo} />
+
       <header className="sticky top-0 z-50 border-b border-white/10 bg-neutral-950/70 backdrop-blur">
         <div className="mx-auto flex max-w-6xl items-center justify-between gap-4 px-4 py-4">
           <Link
@@ -187,7 +196,7 @@ export default function GameDemosPage() {
         </div>
       </header>
 
-      <main className="mx-auto max-w-6xl px-4 py-10">
+      <main className="relative z-20 mx-auto max-w-6xl px-4 py-10">
         <section className="flex flex-col gap-3">
           <div className="text-sm font-medium text-emerald-300">
             Game Demos
@@ -208,7 +217,7 @@ export default function GameDemosPage() {
         </section>
       </main>
 
-      <footer className="border-t border-white/10">
+      <footer className="relative z-20 border-t border-white/10">
         <div className="mx-auto max-w-6xl px-4 py-6 text-sm text-white/50">
           © {new Date().getFullYear()} by {myName}. All rights reserved.
         </div>

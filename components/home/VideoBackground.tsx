@@ -20,7 +20,7 @@ export default function VideoBackground({ src, poster }: VideoBackgroundProps) {
   }, []);
 
   return (
-    <div className="absolute inset-0 overflow-hidden">
+    <div className="absolute inset-0 overflow-hidden pointer-events-none">
       <video
         ref={videoRef}
         className="h-full w-full object-cover"
