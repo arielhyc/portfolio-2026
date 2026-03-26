@@ -11,6 +11,9 @@ import {
   CartesianGrid,
   Tooltip,
 } from "recharts";
+import HeroContent from "@/components/home/HeroContent";
+import SparkleEffectsLayer from "@/components/home/SparkleEffectsLayer";
+import VideoBackground from "@/components/home/VideoBackground";
 
 type NavItem = { label: string; href: string };
 type Project = {
@@ -69,6 +72,7 @@ const contact = {
   email: "he.your-email@example.com", // TODO: Replace
   phone: "+1 (000) 000-0000", // TODO: Replace
 };
+const heroVideo = "videos/hero-bg.mp4"; // Put your loop video in public/videos/hero-bg.mp4
 
 const barData = [
   { label: "Gameplay", value: 12 },
@@ -190,8 +194,10 @@ function ProjectGrid({ items }: { items: Project[] }) {
 
 export default function HomePage() {
   return (
-    <div className="min-h-screen bg-neutral-950 text-white">
-      <header className="sticky top-0 z-50 border-b border-white/10 bg-neutral-950/70 backdrop-blur">
+    <div className="relative min-h-screen bg-neutral-950 text-white">
+      <SparkleEffectsLayer />
+
+      <header className="sticky top-0 z-40 border-b border-white/10 bg-neutral-950/70 backdrop-blur">
         <div className="mx-auto flex max-w-6xl items-center justify-between gap-4 px-4 py-4">
           <Link
             href="/"
@@ -214,70 +220,18 @@ export default function HomePage() {
         </div>
       </header>
 
-      <main className="mx-auto max-w-6xl px-4 py-10">
-        <section className="grid gap-8 md:grid-cols-2 md:items-center">
-          <div>
-            <div className="text-sm font-medium text-emerald-300">
-              Welcome
-            </div>
-            <h1 className="mt-3 text-4xl font-semibold leading-tight md:text-5xl">
-              {myName}
-            </h1>
+      <section className="relative isolate">
+        <VideoBackground src={heroVideo} />
+        <HeroContent
+          myName={myName}
+          resumeZh={resumes.zh}
+          resumeEn={resumes.en}
+          email={contact.email}
+          phone={contact.phone}
+        />
+      </section>
 
-            <p className="mt-4 text-sm leading-7 text-white/70">
-              A game-focused portfolio with data-driven project sections and a clean, premium layout.
-            </p>
-
-            <div className="mt-6 flex flex-wrap gap-3">
-              <Link
-                href={resumes.zh}
-                className="rounded-2xl bg-white px-5 py-3 text-sm font-semibold text-black transition hover:bg-white/90"
-              >
-                Resume in Chinese
-              </Link>
-              <Link
-                href={resumes.en}
-                className="rounded-2xl border border-white/10 bg-white/[0.03] px-5 py-3 text-sm font-semibold text-white/90 transition hover:border-white/20"
-              >
-                Resume in English
-              </Link>
-            </div>
-          </div>
-
-          <div className="rounded-3xl border border-white/10 bg-white/[0.03] p-6">
-            <div className="flex items-start justify-between gap-4">
-              <div>
-                <div className="text-sm text-white/60">Say Hello</div>
-                <div className="mt-1 text-xl font-semibold">Let’s talk</div>
-              </div>
-              <div className="text-xs text-white/50">Contact</div>
-            </div>
-
-            <div className="mt-5 space-y-3">
-              <a
-                href={`mailto:${contact.email}`}
-                className="flex items-center justify-between gap-4 rounded-2xl border border-white/10 bg-black/20 px-4 py-3 transition hover:border-white/20"
-              >
-                <span className="text-sm font-medium text-white/85">Email</span>
-                <span className="text-sm text-white/70">{contact.email}</span>
-              </a>
-              <a
-                href={`tel:${contact.phone.replaceAll(" ", "")}`}
-                className="flex items-center justify-between gap-4 rounded-2xl border border-white/10 bg-black/20 px-4 py-3 transition hover:border-white/20"
-              >
-                <span className="text-sm font-medium text-white/85">Phone</span>
-                <span className="text-sm text-white/70">{contact.phone}</span>
-              </a>
-            </div>
-
-            <div className="mt-6 rounded-2xl bg-gradient-to-r from-emerald-500/10 to-cyan-500/10 p-4">
-              <div className="text-xs text-white/60">Focus</div>
-              <div className="mt-1 text-sm text-white/80">
-                Gameplay systems, UI craft, and production-friendly tooling.
-              </div>
-            </div>
-          </div>
-        </section>
+      <main className="relative z-20 mx-auto max-w-6xl px-4 py-14">
 
         <section className="mt-12">
           <div className="mb-4 flex items-end justify-between gap-3">
